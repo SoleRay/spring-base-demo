@@ -10,7 +10,7 @@
 
     <properties>
         <spring.version>5.1.3.RELEASE</spring.version>
-        <jacksion.version>2.8.8</jacksion.version>
+        <jacksion.version>2.10.0</jacksion.version>
         <targetJavaProject>${basedir}/src/main/java</targetJavaProject>
     </properties>
 
