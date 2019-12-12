@@ -5,6 +5,7 @@ import com.demo.entity.demo.Demo;
 import com.demo.service.base.impl.BaseServiceImpl;
 import com.demo.service.demo.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,6 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
 
     @Autowired
     private DemoDao demoDao;
-
 
     /**
      * 1.加入外层大事务的方式
@@ -43,12 +43,12 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
 //        }
 
           /** 1.3 捕获异常后不设置回滚 */
-        try{
-            demoDao.insert(demo);
-            int x = 1/0;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//            demoDao.insert(demo);
+//            int x = 1/0;
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
 
 

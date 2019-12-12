@@ -21,22 +21,102 @@
 		<property name="password" value="123456" />
 	</bean>
 
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+	<!-- constructor -->
+	<bean id="xmlBeanConstruct" class="com.demo.bean.common.xml.construct.XmlBeanConstruct" lazy-init="true">
+		<constructor-arg value="8"></constructor-arg>
+		<constructor-arg value="dudu"></constructor-arg>
+		<constructor-arg ref="apple"></constructor-arg>
+	</bean>
+	<!-- constructor -->
+
+
+	<!-- depsOn -->
+	<bean class="com.demo.bean.common.xml.depsOn.XmlBeanDepOn" depends-on="toDepBean" lazy-init="true"/>
+	<bean id="toDepBean" class="com.demo.bean.common.xml.depsOn.XmlBeanToDep" lazy-init="true" />
+	<!-- depsOn -->
+
+
+
+	<!-- autowire -->
+	<bean class="com.demo.bean.common.xml.property.autowire.XmlBeanAutowire" autowire="byName" lazy-init="true" />
+	<!-- autowire -->
+
+
+
+	<!-- parent -->
+	<bean id="beanP" class="com.demo.bean.common.xml.parent.XmlBeanParent" lazy-init="true" >
+		<property name="gender" value="1"/>
 	</bean>
 
-	<tx:advice id="txAdvice" transaction-manager="txManager">
-		<tx:attributes>
-			<tx:method name="get*"/>
-		</tx:attributes>
-	</tx:advice>
+	<bean id="beanC" class="com.demo.bean.common.xml.parent.XmlBeanChild" parent="beanP" lazy-init="true">
+		<property name="name" value="box"/>
+	</bean>
+	<!-- parent -->
 
-	<aop:config>
-		<aop:pointcut id="pt" expression="execution(public * com.demo..*(..))"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="pt" />
-	</aop:config>
 
-		
+	<!-- lookup -->
+	<bean class="com.demo.bean.common.xml.property.lookup.XmlBeanLookup" lazy-init="true">
+		<lookup-method name="getBeanPlainBean" />
+	</bean>
+	<!-- lookup -->
+
+
+	<!-- replace -->
+	<bean class="com.demo.bean.common.xml.property.replace.XmlBeanReplace" lazy-init="true" >
+		<replaced-method name="compute" replacer="cmr" />
+	</bean>
+
+	<bean id="cmr" class="com.demo.bean.common.xml.property.replace.XmlComputeMethodReplacer" lazy-init="true" />
+	<!-- replace -->
+
+	<!--<bean id="beforeAdvice" class="com.demo.aop.before.MyBeforeAdvice"></bean>-->
+	<!--<bean id="AroundAdvice" class="com.demo.aop.around.MyAroundAdvice"></bean>-->
+
+	<!--<aop:config>-->
+		<!--<aop:pointcut id="pt" expression="execution(public * com.demo..*(..))"/>-->
+		<!--<aop:advisor advice-ref="beforeAdvice" pointcut-ref="pt" />-->
+		<!--<aop:advisor advice-ref="AroundAdvice" pointcut-ref="pt" />-->
+	<!--</aop:config>-->
+
+
+	<!-- 配置了包含advice方法的Bean -->
+	<!--<bean id="aspectAdviceBean" class="com.demo.aop.aspect.AspectAdviceBean" />-->
+
+	<!--<aop:config proxy-target-class="true">-->
+		<!--<aop:pointcut id="all" expression="execution(* com.demo..*(..))" />-->
+		<!--<aop:pointcut id="services" expression="execution(* com.demo.service.demo..add*(..))" />-->
+		<!--<aop:pointcut id="doMethods" expression="execution(* com.demo.service.demo..do*(..))" />-->
+		<!--<aop:aspect id="a1" ref="aspectAdviceBean" order="1">-->
+			<!--<aop:before method="before1" pointcut-ref="all" />-->
+			<!--<aop:before method="before2" pointcut-ref="doMethods"/>-->
+			<!--<aop:before method="before3" pointcut="execution(* com.demo.service.demo..add*(..)) and args(tk)" />-->
+			<!--<aop:before method="before4" pointcut="execution(* com.demo.service.demo..add*(..)) and args(tk,ti)"/>-->
+			<!--<aop:around method="arround1" pointcut-ref="services"/>-->
+			<!--<aop:around method="arround2" pointcut="execution(* com.demo.service.demo..add*(..)) and args(name)"/>-->
+			<!--<aop:after-returning method="afterReturning" pointcut-ref="services" returning="retValue"/>-->
+			<!--<aop:after-throwing method="afterThrowing" pointcut-ref="services" throwing="e"/>-->
+			<!--<aop:after method="after" pointcut-ref="services"/>-->
+		<!--</aop:aspect>-->
+	<!--</aop:config>-->
+
+	<!--<aop:aspectj-autoproxy/>-->
+
+
+
+	<!--<tx:advice id="txAdvice" transaction-manager="txManager">-->
+		<!--<tx:attributes>-->
+			<!--<tx:method name="add*"/>-->
+		<!--</tx:attributes>-->
+	<!--</tx:advice>-->
+
+	<!--<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+		<!--<property name="dataSource" ref="dataSource" />-->
+	<!--</bean>-->
+
+
+
+	<!--<tx:annotation-driven />-->
+
 	<!-- Spring的配置文件不扫描Controller -->
 	<context:component-scan base-package="com.demo">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
