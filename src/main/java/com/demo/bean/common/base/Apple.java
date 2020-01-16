@@ -38,12 +38,4 @@ public class Apple implements Fruit {
     public void setShape(String shape) {
         this.shape = shape;
     }
-
-    @Override
-    public String toString() {
-        return "Apple{" +
-                "color='" + color + '\'' +
-                ", shape='" + shape + '\'' +
-                '}';
-    }
 }

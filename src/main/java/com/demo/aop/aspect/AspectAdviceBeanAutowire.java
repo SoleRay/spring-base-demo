@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Aspect
-@Configuration
+//@Configuration
 public class AspectAdviceBeanAutowire {
 
 

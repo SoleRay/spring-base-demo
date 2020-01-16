@@ -6,11 +6,14 @@ import com.demo.service.base.impl.BaseServiceImpl;
 import com.demo.service.demo.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 @Service
+//@Lazy
 public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoService {
 
     @Autowired
@@ -26,7 +29,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
      *
      *  总结：加入外层大事务的方式，意味着与外层大事务同为一体，共进退，保持高度一致性。
      */
-    @Transactional
+    @Transactional(propagation = Propagation.NESTED)
     @Override
     public void add(Demo demo){
           /** 1.1 抛出异常 */
@@ -34,13 +37,13 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
 //        int x = 1/0;
 
         /** 1.2 捕获异常后设置回滚 */
-//        try{
-//            demoDao.insert(demo);
+        try{
+            demoDao.insert(demo);
 //            int x = 1/0;
-//        }catch (Exception e){
+        }catch (Exception e){
 //            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-//            e.printStackTrace();
-//        }
+            e.printStackTrace();
+        }
 
           /** 1.3 捕获异常后不设置回滚 */
 //        try{
@@ -62,7 +65,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
      *
      *   总结：新开事务的情况下，只要本事务不抛出异常，本事务和外层事务互不影响
      */
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public void addWithNewTrans(Demo demo){
         /** 2.1 抛出异常 */
@@ -102,7 +105,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
      *   开启新事物时，会挂起外层的大事务。
      *   但开始内嵌事务时，不会挂起外层的大事务
      */
-    @Transactional(propagation = Propagation.NESTED)
+//    @Transactional(propagation = Propagation.NESTED)
     @Override
     public void addWithNESTED(Demo demo){
         /** 3.1 抛出异常 */
@@ -134,6 +137,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
     @Transactional
     @Override
     public void change(Demo demo){
-        demoDao.updateByPrimaryKey(demo);
+        this.add(demo);
+//        demoDao.updateByPrimaryKey(demo);
     }
 }

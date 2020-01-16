@@ -4,9 +4,10 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class SpringUtils implements ApplicationContextAware {
 
 	private static ApplicationContext context;
@@ -23,12 +24,16 @@ public class SpringUtils implements ApplicationContextAware {
 		return context.getBean(clazz);
 	}
 
-	public static <T> T getBean(String beanName, Class<T> clazz) {
+	public static <T> T getBean(String beanName) {
+		return getBean(beanName,null);
+	}
+
+
+	public static <T> T getBean(String beanName, Class<T> requiredType) {
 		if (null == beanName || "".equals(beanName.trim())) {
 			return null;
 		}
-		if (clazz == null) return null;
-		return (T) context.getBean(beanName, clazz);
+		return (T) context.getBean(beanName, requiredType);
 	}
 
 	public static ApplicationContext getContext(){

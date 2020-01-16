@@ -21,61 +21,80 @@
 		<property name="password" value="123456" />
 	</bean>
 
-	<!-- constructor -->
-	<bean id="xmlBeanConstruct" class="com.demo.bean.common.xml.construct.XmlBeanConstruct" lazy-init="true">
-		<constructor-arg value="8"></constructor-arg>
-		<constructor-arg value="dudu"></constructor-arg>
-		<constructor-arg ref="apple"></constructor-arg>
-	</bean>
-	<!-- constructor -->
+	<!--&lt;!&ndash; constructor &ndash;&gt;-->
+	<!--<bean id="xmlBeanConstruct" class="com.demo.bean.common.xml.construct.XmlBeanConstruct" lazy-init="true">-->
+		<!--<constructor-arg value="8"></constructor-arg>-->
+		<!--<constructor-arg value="dudu"></constructor-arg>-->
+		<!--<constructor-arg ref="apple"></constructor-arg>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; constructor &ndash;&gt;-->
 
 
-	<!-- depsOn -->
-	<bean class="com.demo.bean.common.xml.depsOn.XmlBeanDepOn" depends-on="toDepBean" lazy-init="true"/>
-	<bean id="toDepBean" class="com.demo.bean.common.xml.depsOn.XmlBeanToDep" lazy-init="true" />
-	<!-- depsOn -->
-
-
-
-	<!-- autowire -->
-	<bean class="com.demo.bean.common.xml.property.autowire.XmlBeanAutowire" autowire="byName" lazy-init="true" />
-	<!-- autowire -->
+	<!--&lt;!&ndash; depsOn &ndash;&gt;-->
+	<!--<bean class="com.demo.bean.common.xml.depsOn.XmlBeanDepOn" depends-on="toDepBean" lazy-init="true"/>-->
+	<!--<bean id="toDepBean" class="com.demo.bean.common.xml.depsOn.XmlBeanToDep" lazy-init="true" />-->
+	<!--&lt;!&ndash; depsOn &ndash;&gt;-->
 
 
 
-	<!-- parent -->
-	<bean id="beanP" class="com.demo.bean.common.xml.parent.XmlBeanParent" lazy-init="true" >
-		<property name="gender" value="1"/>
-	</bean>
+	<!--&lt;!&ndash; autowire &ndash;&gt;-->
+	<!--<bean id="xmlBeanPropAutowire" class="com.demo.bean.common.xml.property.autowire.XmlBeanPropAutowire" autowire="byName" lazy-init="true" >-->
+		<!--<property name="properties">-->
+			<!--<props>-->
+				<!--<prop key="name">SoleRay</prop>-->
+				<!--<prop key="gender">male</prop>-->
+			<!--</props>-->
+		<!--</property>-->
+		<!--<property name="strList">-->
+			<!--<list>-->
+				<!--<value>tom</value>-->
+				<!--<value>mike</value>-->
+			<!--</list>-->
+		<!--</property>-->
+		<!--<property name="age" value="5"></property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; autowire &ndash;&gt;-->
 
-	<bean id="beanC" class="com.demo.bean.common.xml.parent.XmlBeanChild" parent="beanP" lazy-init="true">
-		<property name="name" value="box"/>
-	</bean>
-	<!-- parent -->
+
+	<!--<bean class="com.demo.bean.common.xml.init.XmlBeanInitAutowire"-->
+		  <!--init-method="initMethod"-->
+		  <!--destroy-method="destroyMethod"-->
+		  <!--lazy-init="true"/>-->
+
+	<!--&lt;!&ndash; parent &ndash;&gt;-->
+	<!--<bean id="beanP" class="com.demo.bean.common.xml.parent.XmlBeanParent" lazy-init="true" >-->
+		<!--<property name="gender" value="1"/>-->
+	<!--</bean>-->
+
+	<!--<bean id="beanC" class="com.demo.bean.common.xml.parent.XmlBeanChild" parent="beanP" lazy-init="true">-->
+		<!--<property name="name" value="box"/>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; parent &ndash;&gt;-->
 
 
-	<!-- lookup -->
-	<bean class="com.demo.bean.common.xml.property.lookup.XmlBeanLookup" lazy-init="true">
-		<lookup-method name="getBeanPlainBean" />
-	</bean>
-	<!-- lookup -->
+	<!--&lt;!&ndash; lookup &ndash;&gt;-->
+	<!--<bean class="com.demo.bean.common.xml.property.lookup.XmlBeanLookup" lazy-init="true">-->
+		<!--<lookup-method name="getBeanPlainBean" />-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; lookup &ndash;&gt;-->
 
 
-	<!-- replace -->
-	<bean class="com.demo.bean.common.xml.property.replace.XmlBeanReplace" lazy-init="true" >
-		<replaced-method name="compute" replacer="cmr" />
-	</bean>
+	<!--&lt;!&ndash; replace &ndash;&gt;-->
+	<!--<bean class="com.demo.bean.common.xml.property.replace.XmlBeanReplace" lazy-init="true" >-->
+		<!--<replaced-method name="compute" replacer="cmr" />-->
+	<!--</bean>-->
 
-	<bean id="cmr" class="com.demo.bean.common.xml.property.replace.XmlComputeMethodReplacer" lazy-init="true" />
-	<!-- replace -->
+	<!--<bean id="cmr" class="com.demo.bean.common.xml.property.replace.XmlComputeMethodReplacer" lazy-init="true" />-->
+	<!--&lt;!&ndash; replace &ndash;&gt;-->
 
 	<!--<bean id="beforeAdvice" class="com.demo.aop.before.MyBeforeAdvice"></bean>-->
 	<!--<bean id="AroundAdvice" class="com.demo.aop.around.MyAroundAdvice"></bean>-->
 
 	<!--<aop:config>-->
 		<!--<aop:pointcut id="pt" expression="execution(public * com.demo..*(..))"/>-->
-		<!--<aop:advisor advice-ref="beforeAdvice" pointcut-ref="pt" />-->
-		<!--<aop:advisor advice-ref="AroundAdvice" pointcut-ref="pt" />-->
+		<!--&lt;!&ndash;<aop:advisor advice-ref="beforeAdvice" pointcut-ref="pt" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<aop:advisor advice-ref="AroundAdvice" pointcut-ref="pt" />&ndash;&gt;-->
+		<!--<aop:advisor advice-ref="txAdvice" pointcut-ref="pt"/>-->
 	<!--</aop:config>-->
 
 
@@ -85,17 +104,17 @@
 	<!--<aop:config proxy-target-class="true">-->
 		<!--<aop:pointcut id="all" expression="execution(* com.demo..*(..))" />-->
 		<!--<aop:pointcut id="services" expression="execution(* com.demo.service.demo..add*(..))" />-->
-		<!--<aop:pointcut id="doMethods" expression="execution(* com.demo.service.demo..do*(..))" />-->
+		<!--&lt;!&ndash;<aop:pointcut id="doMethods" expression="execution(* com.demo.service.demo..do*(..))" />&ndash;&gt;-->
 		<!--<aop:aspect id="a1" ref="aspectAdviceBean" order="1">-->
 			<!--<aop:before method="before1" pointcut-ref="all" />-->
-			<!--<aop:before method="before2" pointcut-ref="doMethods"/>-->
-			<!--<aop:before method="before3" pointcut="execution(* com.demo.service.demo..add*(..)) and args(tk)" />-->
-			<!--<aop:before method="before4" pointcut="execution(* com.demo.service.demo..add*(..)) and args(tk,ti)"/>-->
-			<!--<aop:around method="arround1" pointcut-ref="services"/>-->
-			<!--<aop:around method="arround2" pointcut="execution(* com.demo.service.demo..add*(..)) and args(name)"/>-->
-			<!--<aop:after-returning method="afterReturning" pointcut-ref="services" returning="retValue"/>-->
-			<!--<aop:after-throwing method="afterThrowing" pointcut-ref="services" throwing="e"/>-->
-			<!--<aop:after method="after" pointcut-ref="services"/>-->
+			<!--<aop:before method="before2" pointcut-ref="services"/>-->
+			<!--&lt;!&ndash;<aop:before method="before3" pointcut="execution(* com.demo.service.demo..add*(..)) and args(tk)" />&ndash;&gt;-->
+			<!--&lt;!&ndash;<aop:before method="before4" pointcut="execution(* com.demo.service.demo..add*(..)) and args(tk,ti)"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<aop:around method="arround1" pointcut-ref="services"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<aop:around method="arround2" pointcut="execution(* com.demo.service.demo..add*(..)) and args(name)"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<aop:after-returning method="afterReturning" pointcut-ref="services" returning="retValue"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<aop:after-throwing method="afterThrowing" pointcut-ref="services" throwing="e"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<aop:after method="after" pointcut-ref="services"/>&ndash;&gt;-->
 		<!--</aop:aspect>-->
 	<!--</aop:config>-->
 
@@ -109,13 +128,13 @@
 		<!--</tx:attributes>-->
 	<!--</tx:advice>-->
 
-	<!--<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-		<!--<property name="dataSource" ref="dataSource" />-->
-	<!--</bean>-->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 
 
-	<!--<tx:annotation-driven />-->
+	<!--<tx:annotation-driven transaction-manager="txManager"/>-->
 
 	<!-- Spring的配置文件不扫描Controller -->
 	<context:component-scan base-package="com.demo">
