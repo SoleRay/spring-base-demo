@@ -16,11 +16,7 @@ public class TestService {
     @Autowired
     private DemoService demoService;
 
-    @Autowired
-    private SecondDemoService secondDemoService;
 
-    @Autowired
-    private OtherService otherService;
 
     @Test
     public void testDemoService(){
@@ -30,15 +26,6 @@ public class TestService {
         demoService.add(new Demo());
     }
 
-    @Test
-    public void testOtherService(){
-        otherService.add(new Demo());
-    }
-
-    @Test
-    public void testSecondDemoService(){
-        secondDemoService.add(new Demo());
-    }
 
 }
 
