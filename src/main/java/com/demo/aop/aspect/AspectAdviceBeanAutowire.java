@@ -6,7 +6,7 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.context.annotation.Configuration;
 
 
-@Aspect
+//@Aspect
 //@Configuration
 public class AspectAdviceBeanAutowire {
 
