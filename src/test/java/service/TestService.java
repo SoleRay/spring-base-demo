@@ -2,15 +2,11 @@ package service;
 
 import com.demo.entity.demo.Demo;
 import com.demo.service.demo.DemoService;
-import com.demo.service.demo.OtherService;
-import com.demo.service.demo.SecondDemoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 
 @RunWith(SpringRunner.class)
