@@ -27,8 +27,8 @@ public class TestBD {
     @Test
     public void testBeanFactoryPostProcessor(){
 
-        Object apple = SpringUtils.getBean("apple");
-        System.out.println(apple);
+//        Object apple = SpringUtils.getBean("apple");
+//        System.out.println(apple);
     }
 
 }

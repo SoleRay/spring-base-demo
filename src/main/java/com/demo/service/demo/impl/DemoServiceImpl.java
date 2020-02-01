@@ -29,7 +29,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
      *
      *  总结：加入外层大事务的方式，意味着与外层大事务同为一体，共进退，保持高度一致性。
      */
-    @Transactional(propagation = Propagation.NESTED)
+    @Transactional
     @Override
     public void add(Demo demo){
           /** 1.1 抛出异常 */

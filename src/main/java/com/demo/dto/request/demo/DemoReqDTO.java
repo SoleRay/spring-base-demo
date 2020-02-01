@@ -11,6 +11,8 @@ public class DemoReqDTO {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate createDate;
 
+    private BoxBean boxBean;
+
     public long getId() {
         return id;
     }
@@ -26,4 +28,14 @@ public class DemoReqDTO {
     public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
+
+    public BoxBean getBoxBean() {
+        return boxBean;
+    }
+
+    public void setBoxBean(BoxBean boxBean) {
+        this.boxBean = boxBean;
+    }
+
+
 }
